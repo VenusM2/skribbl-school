@@ -1,6 +1,6 @@
 import turtle
 import random
-"""
+
 randomword = turtle.Turtle()
 text = turtle.Turtle()
 screen = turtle.Screen()
@@ -39,26 +39,16 @@ for c in range(2):
     turtle.right(90)
 
 #בוחר מילה רנדומלית
-
+"""
 randomword.goto(-140,225)
 with open(".random_words.txt") as file:
     allText = file.read()
     words = list(map(str, allText.split()))
 
     randomword.write(random.choice(words), font = ('Arial', 16, 'normal'))
-
-#מכין טקסט מתחדש
-while x == 0:
-    for i in range(14):
-        value = screen.textinput("what is your guess?", "enter here")
-        text.write(value)
-        text.forward(10)
-    text.goto(100, 60)
-    text.clear()
-
-screen.listen()
-screen.mainloop()
 """
+
+
 # setting players and screen
 screen = turtle.Screen()
 player = turtle.Turtle()
@@ -256,5 +246,15 @@ def painter():
 
 
 painter()
+#מכין טקסט מתחדש
+while x == 0:
+    for i in range(14):
+        value = input("what is your guess?")
+        text.write(value)
+        text.forward(10)
+    text.goto(100, 60)
+    text.clear()
 
+
+screen.listen()
 turtle.mainloop()
