@@ -1,6 +1,6 @@
 import turtle
 import random
-
+"""
 randomword = turtle.Turtle()
 text = turtle.Turtle()
 screen = turtle.Screen()
@@ -13,7 +13,7 @@ turtle.penup()
 turtle.goto(98,75)
 turtle.pendown()
 
-"""
+
 #מצייר לוח
 for c in range(2):
     turtle.forward(50)
