@@ -1,5 +1,64 @@
 import turtle
+import random
 
+randomword = turtle.Turtle()
+text = turtle.Turtle()
+screen = turtle.Screen()
+x = 0
+text.penup()
+randomword.penup()
+text.goto(100, 60)
+text.right(90)
+turtle.penup()
+turtle.goto(98,75)
+turtle.pendown()
+
+"""
+#מצייר לוח
+for c in range(2):
+    turtle.forward(50)
+    turtle.right(90)
+    turtle.forward(150)
+    turtle.right(90)
+turtle.pendown()
+turtle.goto(98,-75)
+turtle.right(90)
+for c in range(2):
+    turtle.right(90)
+    turtle.forward(450)
+    turtle.right(90)
+    turtle.forward(300)
+turtle.penup()
+turtle.goto(-150,225)
+turtle.right(180)
+turtle.pendown()
+for c in range(2):
+    turtle.forward(25)
+    turtle.right(90)
+    turtle.forward(75)
+    turtle.right(90)
+
+#בוחר מילה רנדומלית
+
+randomword.goto(-140,225)
+with open(".random_words.txt") as file:
+    allText = file.read()
+    words = list(map(str, allText.split()))
+
+    randomword.write(random.choice(words), font = ('Arial', 16, 'normal'))
+
+#מכין טקסט מתחדש
+while x == 0:
+    for i in range(14):
+        value = screen.textinput("what is your guess?", "enter here")
+        text.write(value)
+        text.forward(10)
+    text.goto(100, 60)
+    text.clear()
+
+screen.listen()
+screen.mainloop()
+"""
 # setting players and screen
 screen = turtle.Screen()
 player = turtle.Turtle()
@@ -112,10 +171,11 @@ psize2.penup()
 psize5.penup()
 psize10.penup()
 
+# fill color
+def fill(x,y):
+    player.fillcolor()
 
 # setting colors
-
-
 # methods for color buttons
 def ColorGreen(x,y):
     player.color("green")
@@ -190,6 +250,7 @@ def painter():
     psize5.onclick(pensize5, btn=3)
     psize10.onclick(pensize10, btn=3)
     screen.onclick(teleportto)
+    player.onclick(fill,btn=3)
     player.ondrag(goto)
 
 
