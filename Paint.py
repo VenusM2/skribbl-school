@@ -10,12 +10,33 @@ clearbtn.speed(0)
 clearbtn.penup()
 clearbtn.shape("square")
 clearbtn.goto(0,-300)
-
+# setting eraser button
+eraser = turtle.Turtle()
+eraser.speed(0)
+eraser.penup()
+eraser.shape("square")
+eraser.goto(160,-300)
 
 #הגדרת 4 ריבועים TURTLE ל4 צבעים
+Gra = turtle.Turtle()
+Gra.speed(0)
+Gra.shape("circle")
+Gra.color("gray")
+Gra.shapesize(2)
+Gra.penup()
+Gra.goto(-560,-240 )
+
+Br = turtle.Turtle()
+Br.speed(0)
+Br.shape("circle")
+Br.color("brown")
+Br.shapesize(2)
+Br.penup()
+Br.goto(-400,-240 )
+
 G = turtle.Turtle()
 G.speed(0)
-G.shape("turtle")
+G.shape("circle")
 G.color("green")
 G.shapesize(2)
 G.penup()
@@ -24,7 +45,7 @@ G.goto(-240,-240)
 
 R = turtle.Turtle()
 R.speed(0)
-R.shape("turtle")
+R.shape("circle")
 R.color("red")
 R.shapesize(2)
 R.penup()
@@ -33,19 +54,43 @@ R.goto(-80,-240)
 
 Y = turtle.Turtle()
 Y.speed(0)
-Y.shape("turtle")
+Y.shape("circle")
 Y.color("yellow")
 Y.shapesize(2)
 Y.penup()
 Y.goto(80,-240)
 
-B = turtle.Turtle()
-B.speed(0)
-B.shape("turtle")
-B.color("blue")
-B.shapesize(2)
-B.penup()
-B.goto(240,-240 )
+Bl = turtle.Turtle()
+Bl.speed(0)
+Bl.shape("circle")
+Bl.color("blue")
+Bl.shapesize(2)
+Bl.penup()
+Bl.goto(240,-240 )
+
+Pi = turtle.Turtle()
+Pi.speed(0)
+Pi.shape("circle")
+Pi.color("pink")
+Pi.shapesize(2)
+Pi.penup()
+Pi.goto(400,-240)
+
+Pu = turtle.Turtle()
+Pu.speed(0)
+Pu.shape("circle")
+Pu.color("purple")
+Pu.shapesize(2)
+Pu.penup()
+Pu.goto(560,-240)
+
+Bla = turtle.Turtle()
+Bla.speed(0)
+Bla.shape("circle")
+Bla.color("black")
+Bla.shapesize(2)
+Bla.penup()
+Bla.goto(720,-240)
 
 psize2 = turtle.Turtle()
 psize5 = turtle.Turtle()
@@ -72,19 +117,26 @@ psize10.penup()
 
 
 # methods for color buttons
-def TAL(x,y):
-    if -252 < x < -222  and -224 > y > -252:
-        player.pencolor('green')
-        print("1")
-    elif -91 < x < -63 and -224 > y > -252:
-        player.pencolor('red')
-        print("2")
-    elif 71 < x < 96 and -224 > y > -252:
-        player.pencolor('yellow')
-        print("3")
-    elif 229 < x < 258 and -224 > y > -252:
-        player.pencolor('blue')
-        print("4")
+def ColorGreen(x,y):
+    player.color("green")
+def ColorRed(x,y):
+    player.color("red")
+def ColorYellow(x,y):
+    player.color("yellow")
+def ColorBlue(x,y):
+    player.color("blue")
+def ColorPink(x,y):
+    player.color("pink")
+def ColorPurple(x,y):
+    player.color("purple")
+def ColorBrown(x,y):
+    player.color("brown")
+def ColorGray(x,y):
+    player.color("gray")
+def ColorBlack(x,y):
+    player.color("black")
+def eraserWhite(x,y,):
+    player.pencolor("white")
 
 def goto(x, y):
     player.ondrag(None)
@@ -110,12 +162,14 @@ def painter():
 
     # basic UI setup
     clearbtn.write("clear" , align='center', move=True)
+    eraser.write("eraser" , align='center', move=True)
     psize2.write("2" , align='center', move=True)
     psize5.write("5" , align='center', move=True)
     psize10.write("10" , align='center', move=True)
 
     # going a bit below the text so the text can be shown
     clearbtn.goto(0,-310)
+    eraser.goto(160,-310)
     psize2.goto(-200, -315)
     psize5.goto(-250, -315)
     psize10.goto(-300, -315)
@@ -123,12 +177,21 @@ def painter():
 
     # on click methods
     clearbtn.onclick(clearpaint, btn=3)
-    screen.onclick(TAL, btn=3)
+    G.onclick(ColorGreen, btn=3)
+    R.onclick(ColorRed, btn=3)
+    Y.onclick(ColorYellow, btn=3)
+    Bl.onclick(ColorBlue, btn=3)
+    Pi.onclick(ColorPink, btn=3)
+    Pu.onclick(ColorPurple, btn=3)
+    Br.onclick(ColorBrown, btn=3)
+    Gra.onclick(ColorGray, btn=3)
+    eraser.onclick(eraserWhite, btn=3)
     psize2.onclick(pensize2, btn=3)
     psize5.onclick(pensize5, btn=3)
     psize10.onclick(pensize10, btn=3)
     screen.onclick(teleportto)
     player.ondrag(goto)
+
 
 
 painter()
