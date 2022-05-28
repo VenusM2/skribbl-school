@@ -215,10 +215,11 @@ def eraserWhite(x, y,):
 
 
 def goto(x, y):
-    player.pendown()
-    player.ondrag(None)
-    player.goto(x, y)
-    player.ondrag(goto)
+    if x > -343 and x < 88 and y < 215 and y > -63:
+        player.pendown()
+        player.ondrag(None)
+        player.goto(x, y)
+        player.ondrag(goto)
 
 
 def pensize2(x, y):
@@ -234,7 +235,7 @@ def pensize10(x, y):
 
 
 def teleportto(x, y):
-    if x > -353 and x < 98 and y < 225 and y > -73:
+    if x > -343 and x < 88 and y < 215 and y > -63:
         player.penup()
         player.goto(x, y)
         player.pendown()
@@ -278,7 +279,7 @@ def painter():
     psize2.onclick(pensize2, btn=3)
     psize5.onclick(pensize5, btn=3)
     psize10.onclick(pensize10, btn=3)
-    screen.onclick(teleportto)
+    screen.onclick(teleportto, btn = 3)
     player.onclick(fill, btn=3)
     player.ondrag(goto)
 
