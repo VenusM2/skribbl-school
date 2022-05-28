@@ -43,14 +43,13 @@ for c in range(2):
     turtle.right(90)
 
 #בוחר מילה רנדומלית
-"""
-randomword.goto(-140,225)
-with open(".random_words.txt") as file:
-    allText = file.read()
-    words = list(map(str, allText.split()))
+def randomWordGen():
+    randomword.goto(-140,225)
+    with open(".random_words.txt") as file:
+        allText = file.read()
+        words = list(map(str, allText.split()))
 
-    randomword.write(random.choice(words), font = ('Arial', 16, 'normal'))
-"""
+        randomword.write(random.choice(words), font = ('Arial', 16, 'normal'))
 
 
 # setting players and screen
@@ -288,7 +287,7 @@ painter()
 #מכין טקסט מתחדש
 while x == 0:
     for i in range(14):
-        value = input("what is your guess?")
+        value = input("what is your guess? ")
         text.write(value)
         text.forward(10)
     text.goto(100, 60)
