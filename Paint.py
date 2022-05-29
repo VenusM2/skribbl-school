@@ -43,13 +43,14 @@ for c in range(2):
     turtle.right(90)
 
 #בוחר מילה רנדומלית
-def randomWordGen():
-    randomword.goto(-140,225)
-    with open(".random_words.txt") as file:
-        allText = file.read()
-        words = list(map(str, allText.split()))
+randomword.goto(-140,225)
+with open(".random_words.txt") as file:
+    allText = file.read()
+    words = list(map(str, allText.split()))
 
-        randomword.write(random.choice(words), font = ('Arial', 16, 'normal'))
+    chosenrandomword = random.choice(words)
+    randomword.write(chosenrandomword, font = ('Arial', 16, 'normal'))
+
 
 
 # setting players and screen
@@ -69,6 +70,20 @@ eraser.shape("square")
 eraser.goto(160, -150)
 
 #הגדרת 4 ריבועים TURTLE ל4 צבעים
+def colorShapeCreate(nameColor, x,y):
+    colorBtn = turtle.Turtle()
+    colorBtn.speed(0)
+    colorBtn.shape("circle")
+    colorBtn.color(nameColor)
+    colorBtn.shapesize(2)
+    colorBtn.penup()
+    colorBtn.goto(x, y)
+    def changeColor(x,y):
+        player.color(nameColor)
+    colorBtn.onclick(changeColor,btn=3)
+    
+colorShapeCreate("pink", -400,-100)
+
 Gra = turtle.Turtle()
 Gra.speed(0)
 Gra.shape("circle")
@@ -266,14 +281,6 @@ def painter():
 
     # on click methods
     clearbtn.onclick(clearpaint, btn=3)
-    G.onclick(ColorGreen, btn=3)
-    R.onclick(ColorRed, btn=3)
-    Y.onclick(ColorYellow, btn=3)
-    Bl.onclick(ColorBlue, btn=3)
-    Pi.onclick(ColorPink, btn=3)
-    Pu.onclick(ColorPurple, btn=3)
-    Br.onclick(ColorBrown, btn=3)
-    Gra.onclick(ColorGray, btn=3)
     eraser.onclick(eraserWhite, btn=3)
     psize2.onclick(pensize2, btn=3)
     psize5.onclick(pensize5, btn=3)
@@ -285,14 +292,19 @@ def painter():
 
 painter()
 #מכין טקסט מתחדש
-while x == 0:
-    for i in range(14):
-        value = input("what is your guess? ")
-        text.write(value)
-        text.forward(10)
+while answer != chosenrandomword:
     text.goto(100, 60)
     text.clear()
+    for i in range(14):
+        value = screen.textinput("what is your guess?", "enter here")
+        text.write(value)
+        answer = value
+        text.forward(10)
+        if answer == chosenrandomword:
+            break
+
 
 
 screen.listen()
 turtle.mainloop()
+
