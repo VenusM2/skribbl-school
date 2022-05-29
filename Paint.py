@@ -1,6 +1,7 @@
 import turtle
 import random
 
+answer = ""
 randomword = turtle.Turtle()
 text = turtle.Turtle()
 screen = turtle.Screen()
@@ -291,17 +292,20 @@ def painter():
 
 
 painter()
+counting = 0
 #מכין טקסט מתחדש
 while answer != chosenrandomword:
-    text.goto(100, 60)
-    text.clear()
-    for i in range(14):
+    if counting == 14:
+        text.goto(100, 60)
+        text.clear()
+    else:
         value = screen.textinput("what is your guess?", "enter here")
         text.write(value)
         answer = value
         text.forward(10)
         if answer == chosenrandomword:
             break
+
 
 
 
