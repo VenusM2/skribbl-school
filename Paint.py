@@ -1,13 +1,19 @@
+from cmath import pi
+from itertools import count
 import turtle
 import random
 
 answer = ""
 randomword = turtle.Turtle()
 text = turtle.Turtle()
+chatBtn = turtle.Turtle()
 screen = turtle.Screen()
 x = 0
+chatBtn.shape("square")
 text.penup()
 randomword.penup()
+chatBtn.penup()
+chatBtn.goto(122,-90)
 text.goto(100, 60)
 text.right(90)
 turtle.speed(0)
@@ -17,6 +23,7 @@ turtle.pendown()
 turtle.hideturtle()
 text.hideturtle()
 randomword.hideturtle()
+
 
 
 #מצייר לוח
@@ -44,14 +51,16 @@ for c in range(2):
     turtle.right(90)
 
 #בוחר מילה רנדומלית
-randomword.goto(-140,225)
-with open(".random_words.txt") as file:
-    allText = file.read()
-    words = list(map(str, allText.split()))
+def wordGen():
+    global chosenrandomword
+    randomword.goto(-140,225)
+    with open(".random_words.txt") as file:
+        allText = file.read()
+        words = list(map(str, allText.split()))
 
-    chosenrandomword = random.choice(words)
-    randomword.write(chosenrandomword, font = ('Arial', 16, 'normal'))
-
+        chosenrandomword = random.choice(words)
+        randomword.write(chosenrandomword, font = ('Arial', 16, 'normal'))
+wordGen()
 
 
 # setting players and screen
@@ -81,9 +90,8 @@ def colorShapeCreate(nameColor, x,y):
     colorBtn.goto(x, y)
     def changeColor(x,y):
         player.color(nameColor)
-    colorBtn.onclick(changeColor,btn=3)
+    colorBtn.onclick(changeColor, btn=3)
     
-colorShapeCreate("pink", -400,-100)
 
 Gra = turtle.Turtle()
 Gra.speed(0)
@@ -259,6 +267,25 @@ def teleportto(x, y):
 def clearpaint(x, y):
     player.clear()
 
+counting = 0
+#מכין טקסט מתחדש
+def chatPopUp(x,y):
+    global answer
+    global counting
+    value = screen.textinput("what is your guess?", "enter here")
+    text.write(value)
+    answer = value
+    text.forward(10)
+    counting += 1
+    if counting == 14:
+        text.goto(100, 60)
+        text.clear()
+        counting = 0
+    if answer == chosenrandomword:
+        randomword.clear()
+        answer = ""
+        wordGen()
+
 
 def painter():
     # buttons location
@@ -268,6 +295,7 @@ def painter():
 
     # basic UI setup
     clearbtn.write("clear", align='center', move=True)
+    chatBtn.write("press to chat", align='center', move=True)
     eraser.write("eraser", align='center', move=True)
     psize2.write("2", align='center', move=True)
     psize5.write("5", align='center', move=True)
@@ -275,36 +303,34 @@ def painter():
 
     # going a bit below the text so the text can be shown
     clearbtn.goto(0, -160)
+    chatBtn.goto(122,-100)
     eraser.goto(160, -160)
     psize2.goto(-200, -160)
     psize5.goto(-250, -160)
     psize10.goto(-300, -160)
 
     # on click methods
-    clearbtn.onclick(clearpaint, btn=3)
-    eraser.onclick(eraserWhite, btn=3)
-    psize2.onclick(pensize2, btn=3)
-    psize5.onclick(pensize5, btn=3)
-    psize10.onclick(pensize10, btn=3)
-    screen.onclick(teleportto, btn = 3)
+    clearbtn.onclick(clearpaint)
+    Br.onclick(ColorBrown)
+    Bl.onclick(ColorBlue)
+    Bla.onclick(ColorBlack)
+    Pi.onclick(ColorPink)
+    Gra.onclick(ColorGray)
+    G.onclick(ColorGreen)
+    Y.onclick(ColorYellow)
+    R.onclick(ColorRed)
+    Pu.onclick(ColorPurple)
+    eraser.onclick(eraserWhite)
+    psize2.onclick(pensize2)
+    psize5.onclick(pensize5)
+    psize10.onclick(pensize10)
+    screen.onclick(teleportto)
     player.onclick(fill, btn=3)
     player.ondrag(goto)
+    chatBtn.onclick(chatPopUp)
 
 
 painter()
-counting = 0
-#מכין טקסט מתחדש
-while answer != chosenrandomword:
-    if counting == 14:
-        text.goto(100, 60)
-        text.clear()
-    else:
-        value = screen.textinput("what is your guess?", "enter here")
-        text.write(value)
-        answer = value
-        text.forward(10)
-        if answer == chosenrandomword:
-            break
 
 
 
