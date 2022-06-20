@@ -1,7 +1,10 @@
 from cmath import pi
 from itertools import count
+import string
 import turtle
 import random
+import winsound
+
 
 answer = ""
 randomword = turtle.Turtle()
@@ -23,7 +26,6 @@ turtle.pendown()
 turtle.hideturtle()
 text.hideturtle()
 randomword.hideturtle()
-
 
 
 #מצייר לוח
@@ -53,6 +55,14 @@ for c in range(2):
 #בוחר מילה רנדומלית
 def wordGen():
     global chosenrandomword
+    global isHidden
+    randomword.clear()
+    answer = ""
+    isHidden = False
+    hideBtn.clear()
+    hideBtn.goto(-60,250)
+    hideBtn.write("hide", align='center', move=True)
+    hideBtn.goto(-60,240)
     randomword.goto(-140,225)
     with open(".random_words.txt") as file:
         allText = file.read()
@@ -60,12 +70,13 @@ def wordGen():
 
         chosenrandomword = random.choice(words)
         randomword.write(chosenrandomword, font = ('Arial', 16, 'normal'))
-wordGen()
 
 
-# setting players and screen
+
+# setting player
 player = turtle.Turtle()
 player.speed(0)
+player.pensize(2)
 # setting clear button
 clearbtn = turtle.Turtle()
 clearbtn.speed(0)
@@ -78,6 +89,16 @@ eraser.speed(0)
 eraser.penup()
 eraser.shape("square")
 eraser.goto(160, -150)
+# setting a button to hide word
+hideBtn = turtle.Turtle()
+hideBtn.speed(0)
+hideBtn.penup()
+hideBtn.shape("square")
+hideBtn.goto(-60,250)
+hideBtn.write("hide", align='center', move=True)
+hideBtn.goto(-60,240)
+isHidden = False
+
 
 #הגדרת 4 ריבועים TURTLE ל4 צבעים
 def colorShapeCreate(nameColor, x,y):
@@ -90,148 +111,41 @@ def colorShapeCreate(nameColor, x,y):
     colorBtn.goto(x, y)
     def changeColor(x,y):
         player.color(nameColor)
-    colorBtn.onclick(changeColor, btn=3)
+    colorBtn.onclick(changeColor)
     
-
-Gra = turtle.Turtle()
-Gra.speed(0)
-Gra.shape("circle")
-Gra.color("gray")
-Gra.shapesize(2)
-Gra.penup()
-Gra.goto(-305, -100)
-
-Br = turtle.Turtle()
-Br.speed(0)
-Br.shape("circle")
-Br.color("brown")
-Br.shapesize(2)
-Br.penup()
-Br.goto(-260, -100)
-
-G = turtle.Turtle()
-G.speed(0)
-G.shape("circle")
-G.color("green")
-G.shapesize(2)
-G.penup()
-G.goto(-215, -100)
+colorShapeCreate("gray", -305,-100)
+colorShapeCreate("brown", -260,-100)
+colorShapeCreate("green", -215,-100)
+colorShapeCreate("red", -170,-100)
+colorShapeCreate("yellow", -125,-100)
+colorShapeCreate("blue",-80 ,-100)
+colorShapeCreate("pink",-35 ,-100)
+colorShapeCreate("purple",10 ,-100)
+colorShapeCreate("black",55 ,-100)
 
 
-R = turtle.Turtle()
-R.speed(0)
-R.shape("circle")
-R.color("red")
-R.shapesize(2)
-R.penup()
-R.goto(-170, -100)
 
 
-Y = turtle.Turtle()
-Y.speed(0)
-Y.shape("circle")
-Y.color("yellow")
-Y.shapesize(2)
-Y.penup()
-Y.goto(-125, -100)
-
-Bl = turtle.Turtle()
-Bl.speed(0)
-Bl.shape("circle")
-Bl.color("blue")
-Bl.shapesize(2)
-Bl.penup()
-Bl.goto(-80, -100)
-
-Pi = turtle.Turtle()
-Pi.speed(0)
-Pi.shape("circle")
-Pi.color("pink")
-Pi.shapesize(2)
-Pi.penup()
-Pi.goto(-35, -100)
-
-Pu = turtle.Turtle()
-Pu.speed(0)
-Pu.shape("circle")
-Pu.color("purple")
-Pu.shapesize(2)
-Pu.penup()
-Pu.goto(10, -100)
-
-Bla = turtle.Turtle()
-Bla.speed(0)
-Bla.shape("circle")
-Bla.color("black")
-Bla.shapesize(2)
-Bla.penup()
-Bla.goto(55, -100)
-
-psize2 = turtle.Turtle()
-psize5 = turtle.Turtle()
-psize10 = turtle.Turtle()
-psize2.speed(0)
-psize5.speed(0)
-psize2.speed(0)
+# setting pen size buttons
+def psize(pSizeNum, x,y):
+    pSizeBtn = turtle.Turtle()
+    pSizeBtn.speed(0)
+    pSizeBtn.penup()
+    pSizeBtn.shape("square")
+    pSizeBtn.goto(x,y)
+    pSizeBtn.write(pSizeNum, align='center', move=True)
+    pSizeBtn.goto(x,y - 10)
+    def changePSize(x,y):
+        player.pensize(pSizeNum)
+    pSizeBtn.onclick(changePSize)
+psize(2, -200, -150)
+psize(5, -250, -150)
+psize(10, -300, -150)
 
 
-# setting shape for color buttons
-psize2.shape("square")
-psize5.shape("square")
-psize10.shape("square")
 player.shape("circle")
 player.shapesize(1)
-
-# setting pen up for buttons
-psize2.penup()
-psize5.penup()
-psize10.penup()
-
-# fill color
-
-
-def fill(x, y):
-    player.fillcolor()
-
 # setting colors
-# methods for color buttons
-
-
-def ColorGreen(x, y):
-    player.color("green")
-
-
-def ColorRed(x, y):
-    player.color("red")
-
-
-def ColorYellow(x, y):
-    player.color("yellow")
-
-
-def ColorBlue(x, y):
-    player.color("blue")
-
-
-def ColorPink(x, y):
-    player.color("pink")
-
-
-def ColorPurple(x, y):
-    player.color("purple")
-
-
-def ColorBrown(x, y):
-    player.color("brown")
-
-
-def ColorGray(x, y):
-    player.color("gray")
-
-
-def ColorBlack(x, y):
-    player.color("black")
-
 
 def eraserWhite(x, y,):
     player.pencolor("white")
@@ -245,17 +159,6 @@ def goto(x, y):
         player.ondrag(goto)
 
 
-def pensize2(x, y):
-    player.pensize(2)
-
-
-def pensize5(x, y):
-    player.pensize(5)
-
-
-def pensize10(x, y):
-    player.pensize(10)
-
 
 def teleportto(x, y):
     if x > -343 and x < 88 and y < 215 and y > -63:
@@ -268,10 +171,29 @@ def clearpaint(x, y):
     player.clear()
 
 counting = 0
+
+def hideWord(x,y):
+    global isHidden
+    if isHidden == False:
+        isHidden = True
+        randomword.clear()
+        hideBtn.clear()
+        hideBtn.goto(-60,250)
+        hideBtn.write("show", align='center', move=True)
+        hideBtn.goto(-60,240)
+    else:
+        isHidden = False
+        randomword.goto(-140,225)
+        randomword.write(chosenrandomword, font = ('Arial', 16, 'normal'))
+        hideBtn.clear()
+        hideBtn.goto(-60,250)
+        hideBtn.write("hide", align='center', move=True)
+        hideBtn.goto(-60,240)
 #מכין טקסט מתחדש
 def chatPopUp(x,y):
     global answer
     global counting
+    global isHidden
     value = screen.textinput("what is your guess?", "enter here")
     text.write(value)
     answer = value
@@ -282,52 +204,30 @@ def chatPopUp(x,y):
         text.clear()
         counting = 0
     if answer == chosenrandomword:
-        randomword.clear()
-        answer = ""
+        winsound.PlaySound('win.wav', 1)
         wordGen()
 
-
 def painter():
-    # buttons location
-    psize2.goto(-200, -150)
-    psize5.goto(-250, -150)
-    psize10.goto(-300, -150)
 
     # basic UI setup
     clearbtn.write("clear", align='center', move=True)
     chatBtn.write("press to chat", align='center', move=True)
     eraser.write("eraser", align='center', move=True)
-    psize2.write("2", align='center', move=True)
-    psize5.write("5", align='center', move=True)
-    psize10.write("10", align='center', move=True)
 
     # going a bit below the text so the text can be shown
     clearbtn.goto(0, -160)
     chatBtn.goto(122,-100)
     eraser.goto(160, -160)
-    psize2.goto(-200, -160)
-    psize5.goto(-250, -160)
-    psize10.goto(-300, -160)
 
     # on click methods
     clearbtn.onclick(clearpaint)
-    Br.onclick(ColorBrown)
-    Bl.onclick(ColorBlue)
-    Bla.onclick(ColorBlack)
-    Pi.onclick(ColorPink)
-    Gra.onclick(ColorGray)
-    G.onclick(ColorGreen)
-    Y.onclick(ColorYellow)
-    R.onclick(ColorRed)
-    Pu.onclick(ColorPurple)
+    hideBtn.onclick(hideWord)
     eraser.onclick(eraserWhite)
-    psize2.onclick(pensize2)
-    psize5.onclick(pensize5)
-    psize10.onclick(pensize10)
     screen.onclick(teleportto)
-    player.onclick(fill, btn=3)
     player.ondrag(goto)
     chatBtn.onclick(chatPopUp)
+
+    wordGen()
 
 
 painter()
